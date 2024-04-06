@@ -79,7 +79,7 @@ def open_site(site_name: str) -> str:
   webbrowser.open(site_name)
   return f"I have opened {site_name}"
 
-def write_to_file(fname, content):
+def write_to_file(fname: str, content: str) -> str:
   with open(fname, "w") as f:
     f.write(content)
   return f"wrote {content} to {fname}"
