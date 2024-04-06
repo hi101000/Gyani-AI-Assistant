@@ -1,13 +1,25 @@
 import openai
 import functions
 import json
+import os
 
 conversation = [
     {"role": "system", "content": """You are an AI assistant named Gyani who can control the user's device to function in a manner not dissimilar to that of Siri. You have been provided with the list of functions available to you, and shall use these functions to serve the user."""},
 ]
 
-with open("key.txt", "r") as f:
+# Get the directory of the current script
+dir_path = os.path.dirname(os.path.realpath(__file__))
+
+# Use it to build the path to keys.txt
+keys_path = os.path.join(dir_path, 'key.txt')
+
+# Now open the file
+with open(keys_path, 'r') as f:
     openai.api_key = f.read()
+
+'''
+with open("key.txt", "r") as f:
+    openai.api_key = f.read()'''
 
 def ask_system(message: str):
     conversation.append({"role": "system", "content": message})  
