@@ -6,18 +6,16 @@ from bs4 import BeautifulSoup
 import sys
 
 
-def open_app(app_name):
+def open_app(app_name: str) -> None:
   app_name = f'{app_name}.app'
   """
   Attempts to launch the application with the given name.
-
   Args:
       app_name: The name of the application to open (e.g., "Github Desktop" or its full path).
 
   Returns:
       None
   """
-
   # Use platform-specific methods for launching apps (consider libraries like `subprocess`)
   # For example (replace with appropriate command for your OS):
   # os.system(f"open {app_name}")  # macOS
@@ -35,19 +33,19 @@ def open_app(app_name):
     return f"No application found matching '{app_name}'."
   return f"Found applications matching '{app_name}':"
 
-def send_message(who, message):
+def send_message(who: str, message:str) -> str:
   os.system(f'osascript message.applescript {who} "{message}"')
   return f"sent message \"{message}\" to recipient {who}"
 
-def get_time():
+def get_time() -> str:
   now = datetime.now()
   current_time = now.strftime("%H:%M:%S")
   return current_time
 
-def get_date():
+def get_date() -> str:
   return date.today()
 
-def get_weather(place):
+def get_weather(place: str) -> str:
   url = f'https://www.google.com/search?q=+"weather"+{place}'
   html = requests.get(url).content
   soup = BeautifulSoup(html, 'html.parser')
@@ -73,10 +71,10 @@ def get_weather(place):
   # printing all the data
   return f"The temperature in {place} is {temp}, the time is {time}, the sky is {sky}, and here's some other relevant information:\n{other_data}"
 
-def leave():
+def leave() -> None:
   sys.exit(0)
 
-def open_site(site_name):
+def open_site(site_name: str) -> str:
   import webbrowser
   webbrowser.open(site_name)
   return f"I have opened {site_name}"

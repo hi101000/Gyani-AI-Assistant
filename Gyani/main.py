@@ -62,7 +62,7 @@ class ChatApp(QMainWindow):
         chat_text = "\n".join(self.chat_history)
         self.chat_label.setText(chat_text)
 
-def main():
+def main() -> None:
     app = QApplication(sys.argv)
     window = ChatApp()
     window.show()

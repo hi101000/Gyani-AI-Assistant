@@ -9,7 +9,7 @@ conversation = [
 with open("key.txt", "r") as f:
     openai.api_key = f.read()
 
-def ask_system(message):
+def ask_system(message: str):
     conversation.append({"role": "system", "content": message})  
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo-0613",
@@ -18,7 +18,7 @@ def ask_system(message):
 
     return response.choices[0].message.content
 
-def ask(message):
+def ask(message: str):
         conversation.append({"role": "user", "content": message})  
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo-0613",
