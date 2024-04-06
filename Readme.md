@@ -1,5 +1,8 @@
 # Gyani AI Assistant
 
+## About
+Gyani (well, the proper transliteration would be Gyaani) is a [Hindi adjective meaning "wise" or "knowledgable."](https://en.wiktionary.org/wiki/ज्ञानी#Hindi) That is what Gyani is supposed to be: a knowledgable and helpful AI assistant who can talk with you like ChatGPT but can help you with your device like Siri does.
+
 ## API Key
 You will need to add a key.txt file with your openai api key in the Gyani directory. Alternatively, you could change the code near the start of ai.py from
 
