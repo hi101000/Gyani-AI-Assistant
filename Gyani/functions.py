@@ -84,6 +84,11 @@ def write_to_file(fname, content):
     f.write(content)
   return f"wrote {content} to {fname}"
 
+def open_file(fname: str) -> str:
+  fname = '\ '.join(fname.split(" "))
+  os.system(f"open {fname}")
+  return f"opened {fname}"
+
 functions = [
   {
       "name": "open_app",
@@ -169,6 +174,19 @@ functions = [
         "content":{
           "type":"string",
           "description":"the user-specified content to write to the files"
+        }
+      }
+    }
+  },
+  {
+    "name":"open_file",
+    "description":"opens a user-specified file",
+    "parameters":{
+      "type":"object",
+      "properties":{
+        "fname":{
+          "type":"string",
+          "description":"the user-specified file name"
         }
       }
     }

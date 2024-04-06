@@ -1,7 +1,7 @@
 # Gyani AI Assistant
 
 ## API Key
-You will need to add a key.txt file with your openai api key in the Gyani directory. Alternatively, you could change the code at the start of ai.py from
+You will need to add a key.txt file with your openai api key in the Gyani directory. Alternatively, you could change the code near the start of ai.py from
 
 ```
 with open("key.txt", "r") as f:
