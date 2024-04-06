@@ -6,7 +6,8 @@ conversation = [
     {"role": "system", "content": """You are an AI assistant named Gyani who can control the user's device to function in a manner not dissimilar to that of Siri. You have been provided with the list of functions available to you, and shall use these functions to serve the user."""},
 ]
 
-openai.api_key = ""
+with open("key.txt", "r") as f:
+    openai.api_key = f.read()
 
 def ask_system(message):
     conversation.append({"role": "system", "content": message})  

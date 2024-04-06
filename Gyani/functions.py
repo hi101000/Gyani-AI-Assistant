@@ -81,6 +81,11 @@ def open_site(site_name):
   webbrowser.open(site_name)
   return f"I have opened {site_name}"
 
+def write_to_file(fname, content):
+  with open(fname, "w") as f:
+    f.write(content)
+  return f"wrote {content} to {fname}"
+
 functions = [
   {
       "name": "open_app",
@@ -149,6 +154,23 @@ functions = [
         "site_name":{
           "type":"string",
           "description":"the url of the website that you have constructed based on the user's request"
+        }
+      }
+    }
+  },
+  {
+    "name":"write_to_file",
+    "description":"writes user-specified content to a user-specified file",
+    "parameters":{
+      "type":"object",
+      "properties":{
+        "fname":{
+          "type":"string",
+          "description":"the user-specified file name"
+        },
+        "content":{
+          "type":"string",
+          "description":"the user-specified content to write to the files"
         }
       }
     }
