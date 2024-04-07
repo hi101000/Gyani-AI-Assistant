@@ -89,6 +89,46 @@ def open_file(fname: str) -> str:
   os.system(f"open {fname}")
   return f"opened {fname}"
 
+def get_headlines_for_a_topic(topic: str) -> str:
+    url = f'https://www.bbc.com/search?q={"+".join(topic.split(" "))}'
+    response = requests.get(url) 
+
+    soup = BeautifulSoup(response.text, 'html.parser') 
+    headlines = soup.find('body').find_all('h2')
+    temp = [] 
+    if len(headlines) <= 20:
+      length = len(headlines)
+    else:
+      length = 20
+    for x in range(0, length): 
+        temp.append(headlines[x].text.strip())
+    headlines = '\n'+'\n'.join(temp)
+    del temp
+    return headlines
+
+def get_generic_headlines() -> str:
+  url = 'https://www.bbc.com/news'
+  response = requests.get(url)
+    
+  soup = BeautifulSoup(response.text, 'html.parser') 
+  headlines = soup.find('body').find_all('h2') 
+  unwanted = ['BBC World News TV', 'BBC World Service Radio', 
+              'News daily newsletter', 'Mobile app', 'Get in touch'] 
+  headlines = list(dict.fromkeys(headlines))
+  if len(headlines) <= 20:
+    length = len(headlines)
+  else:
+    length = 20
+  temp = []
+  for x in range(0, length): 
+      if headlines[x].text.strip() not in unwanted: 
+          temp.append(headlines[x].text.strip())
+  headlines = temp
+  del temp
+  headlines = '\n' + '\n'.join(headlines)
+  return headlines
+
+
 functions = [
   {
       "name": "open_app",
@@ -190,5 +230,23 @@ functions = [
         }
       }
     }
+  },
+  {
+    "name":"get_headlines_for_a_topic",
+    "description":"retreives headlines for a user-specified topic when the user asks for news specifically pertaining to one topic",
+    "parameters":{
+      "type":"object",
+      "properties":{
+        "fname":{
+          "topic":"string",
+          "description":"the user-specified topic to search for"
+        }
+      }
+    }
+  },
+  {
+    "name":"get_generic_headlines",
+    "description":"retreives various generic headlines; for use when user wants news but does not specify a topic",
+    "parameters":{}
   }
 ]

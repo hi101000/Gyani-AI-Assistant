@@ -46,11 +46,12 @@ def ask(message: str):
                 for index in arg.keys():
                     args.append(f'\"{arg[index]}\"')
             re = f"{response['choices'][0]['message']['function_call']['name']}({','.join(args)})"
-            conversation.append({"role": "assistant", "content": re})
-            return eval(f'functions.{re}')
+            conversation.append({"role": "assistant", "content": eval(f'functions.{re}')})
+            return conversation[-1]["content"]
             
             
         else:
             conversation.append({"role": "assistant", "content": response.choices[0].message.content})
         response = response.choices[0].message.content
+        conversation.append({"role": "system", "content": response})  
         return response

@@ -3,3 +3,5 @@
 !requirements.txt
 *.command
 *.pyc
+test.py
+**/*.pyc
