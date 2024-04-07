@@ -5,3 +5,4 @@
 *.pyc
 test.py
 **/*.pyc
+*.cpython-311.pyc
