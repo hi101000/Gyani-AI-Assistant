@@ -128,7 +128,6 @@ def get_generic_headlines() -> str:
   headlines = '\n' + '\n'.join(headlines)
   return headlines
 
-
 functions = [
   {
       "name": "open_app",
