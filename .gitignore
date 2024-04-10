@@ -7,3 +7,4 @@ test.py
 **/*.pyc
 *.cpython-311.pyc
 **/**/*.pyc
+**/**/*.cpython-311.pyc

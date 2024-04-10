@@ -4,6 +4,7 @@ from datetime import datetime, date
 import requests
 from bs4 import BeautifulSoup
 import sys
+from random import choice
 
 
 def open_app(app_name: str) -> None:
@@ -113,7 +114,7 @@ def get_generic_headlines() -> str:
   soup = BeautifulSoup(response.text, 'html.parser') 
   headlines = soup.find('body').find_all('h2') 
   unwanted = ['BBC World News TV', 'BBC World Service Radio', 
-              'News daily newsletter', 'Mobile app', 'Get in touch'] 
+              'News daily newsletter', 'Mobile app', 'Get in touch', "Trending Topics"] 
   headlines = list(dict.fromkeys(headlines))
   if len(headlines) <= 20:
     length = len(headlines)
@@ -123,9 +124,21 @@ def get_generic_headlines() -> str:
   for x in range(0, length): 
       if headlines[x].text.strip() not in unwanted: 
           temp.append(headlines[x].text.strip())
+
+  url = "https://ground.news/blindspot"
+  response = requests.get(url)
+  soup = BeautifulSoup(response.text, 'html.parser') 
+  headlines = soup.find('body').find_all('h4')
+  headlines = list(dict.fromkeys(headlines))
+  for x in range(0, len(headlines)): 
+      if headlines[x].text.strip() not in unwanted: 
+          temp.append(headlines[x].text.strip())
+
+
+
   headlines = temp
   del temp
-  headlines = '\n' + '\n'.join(headlines)
+  headlines = '\n' + '\n\n'.join(headlines)
   return headlines
 
 functions = [
