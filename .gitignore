@@ -9,3 +9,4 @@ test.py
 **/**/*.pyc
 **/**/*.cpython-311.pyc
 .vscode/**
+venv/*
