@@ -10,3 +10,4 @@ test.py
 **/**/*.cpython-311.pyc
 .vscode/**
 venv/*
+serp_key.txt
