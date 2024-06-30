@@ -1,5 +1,5 @@
 *.bin
-key.txt
+*.txt
 !requirements.txt
 *.command
 *.pyc
