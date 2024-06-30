@@ -5,7 +5,18 @@ import requests
 from bs4 import BeautifulSoup
 import sys
 from random import choice
+from serpapi import GoogleSearch
 
+def search_google(keyword):
+    key = ""
+    with open("serp_key.txt", "r") as f:
+        key = f.read()
+    search = GoogleSearch({
+      "q": keyword,
+      "location": "Austin,Texas",
+      "api_key": key
+    })
+    return search.get_dict()
 
 def open_app(app_name: str) -> None:
   app_name = f'{app_name}.app'
@@ -17,19 +28,15 @@ def open_app(app_name: str) -> None:
   Returns:
       None
   """
-  # Use platform-specific methods for launching apps (consider libraries like `subprocess`)
-  # For example (replace with appropriate command for your OS):
-  # os.system(f"open {app_name}")  # macOS
-  # subprocess.run(["open", app_name])  # More portable option
 
 # Example usage
   apps = helpers.find_file_in_directories(app_name)
 
-  if apps:
+  if len(apps)>=1:
     # Handle multiple matches (prompt user, provide more info)
     
     for app in apps:
-      os.system(f'open {app}')
+      os.system(f'open {"\ ".join(app.split(" "))}')
   else:
     return f"No application found matching '{app_name}'."
   return f"Found applications matching '{app_name}':"
@@ -141,6 +148,8 @@ def get_generic_headlines() -> str:
   headlines = '\n' + '\n\n'.join(headlines)
   return headlines
 
+
+
 functions = [
   {
       "name": "open_app",
@@ -249,8 +258,8 @@ functions = [
     "parameters":{
       "type":"object",
       "properties":{
-        "fname":{
-          "topic":"string",
+        "topic":{
+          "type":"string",
           "description":"the user-specified topic to search for"
         }
       }
@@ -260,5 +269,18 @@ functions = [
     "name":"get_generic_headlines",
     "description":"retreives various generic headlines; for use when user wants news but does not specify a topic",
     "parameters":{}
+  },
+{
+    "name":"search_google",
+    "description":"searches google for specified keyword(s)",
+    "parameters":{
+      "type":"object",
+      "properties":{
+        "keyword":{
+          "type":"string",
+          "description":"the user-specified keyword(s) to search for"
+        }
+      }
+    }
   }
 ]
