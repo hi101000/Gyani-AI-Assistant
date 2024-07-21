@@ -1,3 +1,4 @@
+import json
 import os
 import helpers
 from datetime import datetime, date
@@ -9,14 +10,17 @@ from serpapi import GoogleSearch
 
 def search_google(keyword):
     key = ""
-    with open("serp_key.txt", "r") as f:
+    with open("Gyani/serp_key.txt", "r") as f:
         key = f.read()
     search = GoogleSearch({
       "q": keyword,
       "location": "Austin,Texas",
       "api_key": key
     })
-    return search.get_dict()
+    print(search.get_dict()["knowledge_graph"]["description"])
+    # with open("Gyani/google_json.json", "w") as f:
+    #   json.dump(search.get_dict(), f)
+    return search.get_dict()["knowledge_graph"]["description"]
 
 def open_app(app_name: str) -> None:
   app_name = f'{app_name}.app'
